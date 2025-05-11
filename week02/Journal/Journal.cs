@@ -9,7 +9,7 @@ public class Journal {
         
     }
     public void SaveFile(string fileName) {
-        using (StreamWriter outputFile = new StreamWriter(fileName))
+        using (StreamWriter outputFile = new StreamWriter(fileName, append: true))
         {
             foreach (Entry entry in _entries){
                 outputFile.WriteLine(entry.CompleteEntry());
@@ -39,5 +39,43 @@ public class Journal {
             Console.WriteLine();
         }
     }
+
+    public void SearchByDate(string fileName, string date) {
+    if (!File.Exists(fileName))
+    {
+        Console.WriteLine("The file does not exist.");
+        return;
+    }
+
+    string[] lines = File.ReadAllLines(fileName);
+    bool found = false;
+
+    foreach (string line in lines)
+    {
+        if (line.StartsWith("Date:"))
+        {
+            // Ejemplo de línea: Date: 5/11/2025 - Prompt: ..., ...
+            int startIndex = "Date: ".Length;
+            int endIndex = line.IndexOf(" - Prompt:");
+
+            if (endIndex > startIndex)
+            {
+                string lineDate = line.Substring(startIndex, endIndex - startIndex).Trim();
+
+                if (lineDate == date)
+                {
+                    Console.WriteLine(line);
+                    found = true;
+                }
+            }
+        }
+    }
+
+    if (!found)
+    {
+        Console.WriteLine("No entries found for that date.");
+    }
+}
+
 
 }
