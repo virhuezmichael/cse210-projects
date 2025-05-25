@@ -16,11 +16,17 @@ class Program
 
             Console.WriteLine($"{reference.GetReference()}: {scripture.GetDisplayText()}");
             Console.WriteLine();
-            Console.WriteLine("Press enter to continue or type 'quit' to finish:");
+            Console.WriteLine("Press enter to continue, type 'hint' for hint or type 'quit' to finish:");
             string response = Console.ReadLine();
 
             if (response.ToLower() == "quit" || scripture.isCompletelyHidden())
                 break;
+            
+            if (response.ToLower() == "hint")
+            {
+                scripture.ShowHint();
+                continue;
+            }
                 
             scripture.HideRandomWords(3);
         }

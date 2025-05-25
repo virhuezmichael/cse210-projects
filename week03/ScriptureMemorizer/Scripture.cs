@@ -13,7 +13,7 @@ public class Scripture
     }
     public void HideRandomWords(int numberToHide)
     {
-         var visibleWords = _words.Where(w => !w.IsHidden()).ToList();
+        var visibleWords = _words.Where(w => !w.IsHidden()).ToList();
         var random = new Random();
 
         for (int i = 0; i < numberToHide && visibleWords.Count > 0; i++)
@@ -25,11 +25,21 @@ public class Scripture
     }
     public string GetDisplayText()
     {
-         return string.Join(" ", _words.Select(w => w.GetDisplayText()));
+        return string.Join(" ", _words.Select(w => w.GetDisplayText()));
     }
     public bool isCompletelyHidden()
     {
         return _words.All(w => w.IsHidden());
+    }
+    public void ShowHint()
+    {
+        var hiddenWords = _words.Where(w => w.IsHidden()).ToList();
+        if (hiddenWords.Count > 0)
+        {
+            Random rand = new Random();
+            int index = rand.Next(hiddenWords.Count);
+            hiddenWords[index].Show();
+        }
     }
     
 }
