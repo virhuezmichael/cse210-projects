@@ -1,41 +1,41 @@
 public class Video
 {
-    private string title;
-    private string author;
-    private int duration; 
-    private List<Comment> comments;
+    private string _title;
+    private string _author;
+    private int _duration; 
+    private List<Comment> _comments;
 
     public Video(string title, string author, int duration)
     {
-        this.title = title;
-        this.author = author;
-        this.duration = duration;
-        comments = new List<Comment>();
+        this._title = title;
+        this._author = author;
+        this._duration = duration;
+        _comments = new List<Comment>();
     }
 
     public void AddComment(Comment comment)
     {
-        comments.Add(comment);
+        _comments.Add(comment);
     }
 
     public int GetNumberOfComments()
     {
-        return comments.Count;
+        return _comments.Count;
     }
 
     public List<Comment> GetComments()
     {
-        return comments;
+        return _comments;
     }
 
     public void DisplayVideoInfo()
     {
-        Console.WriteLine($"Title: {title}");
-        Console.WriteLine($"Author: {author}");
-        Console.WriteLine($"Duration (seconds): {duration}");
+        Console.WriteLine($"Title: {_title}");
+        Console.WriteLine($"Author: {_author}");
+        Console.WriteLine($"Duration (seconds): {_duration}");
         Console.WriteLine($"Number of comments: {GetNumberOfComments()}");
         Console.WriteLine("Comments:");
-        foreach (var comment in comments)
+        foreach (var comment in _comments)
         {
             comment.DisplayComment();
         }

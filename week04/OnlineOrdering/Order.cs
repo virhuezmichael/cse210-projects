@@ -4,29 +4,29 @@ using System.Text;
 
 public class Order
 {
-    private List<Product> products;
-    private Customer customer;
+    private List<Product> _products;
+    private Customer _customer;
 
     public Order(Customer customer)
     {
-        this.customer = customer;
-        products = new List<Product>();
+        this._customer = customer;
+        _products = new List<Product>();
     }
 
     public void AddProduct(Product product)
     {
-        products.Add(product);
+        _products.Add(product);
     }
 
     public decimal CalculateTotalCost()
     {
         decimal totalProductsCost = 0;
-        foreach (var product in products)
+        foreach (var product in _products)
         {
             totalProductsCost += product.GetTotalCost();
         }
 
-        decimal shippingCost = customer.IsInUSA() ? 5m : 35m;
+        decimal shippingCost = _customer.IsInUSA() ? 5m : 35m;
         return totalProductsCost + shippingCost;
     }
 
@@ -34,7 +34,7 @@ public class Order
     {
         StringBuilder label = new StringBuilder();
         label.AppendLine("Packing Label:");
-        foreach (var product in products)
+        foreach (var product in _products)
         {
             label.AppendLine($"{product.GetName()} (ID: {product.GetProductId()})");
         }
@@ -45,8 +45,8 @@ public class Order
     {
         StringBuilder label = new StringBuilder();
         label.AppendLine("Shipping Label:");
-        label.AppendLine(customer.GetName());
-        label.AppendLine(customer.GetAddress().GetFullAddress());
+        label.AppendLine(_customer.GetName());
+        label.AppendLine(_customer.GetAddress().GetFullAddress());
         return label.ToString();
     }
 }

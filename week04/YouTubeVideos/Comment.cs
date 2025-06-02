@@ -1,23 +1,23 @@
 public class Comment
 {
-    private string commenterName;
-    private string text;
+    private string _commenterName;
+    private string _text;
 
     public Comment(string commenterName, string text)
     {
-        this.commenterName = commenterName;
-        this.text = text;
+        this._commenterName = commenterName;
+        this._text = text;
     }
     public string GetCommenterName()
     {
-        return commenterName;
+        return _commenterName;
     }
     public string GetText()
     {
-        return text;
+        return _text;
     }
     public void DisplayComment()
     {
-        Console.WriteLine(commenterName + " says: " + text);
+        Console.WriteLine(_commenterName + " says: " + _text);
     }
 }
